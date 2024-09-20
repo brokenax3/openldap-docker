@@ -1,0 +1,26 @@
+version: '2'
+services:
+  openldap:
+    image: docker.io/bitnami/openldap:2.6
+    container_name: openldap
+    environment:
+      LDAP_LOG_LEVEL: "256"
+      LDAP_PORT_NUMBER: "389"
+      LDAP_ROOT: "dc=perkeso,dc=gov,dc=my"
+      LDAP_ADMIN_USERNAME: "admin"
+      LDAP_ADMIN_PASSWORD: "password"
+      LDAP_CONFIG_ADMIN_ENABLED: "yes"
+      LDAP_USERS: "acirouser"
+      LDAP_GROUP: ""
+      LDAP_PASSWORDS: "testing"
+      # LDAP_EXTRA_SCHEMAS: "cosine,inetorgperson,rfc2307bis,memberof"
+    volumes:
+      - "./data:/bitnami/openldap"
+      # - "./schema:/schema"
+      # - "./ldifs/rfc2307bis.ldif:/opt/bitnami/openldap/etc/schema/rfc2307bis.ldif"
+      # - "./ldifs/memberof.ldif:/opt/bitnami/openldap/etc/schema/memberof.ldif"
+  
+    ports:
+      - "389:389"
+      - "636:636"
+
